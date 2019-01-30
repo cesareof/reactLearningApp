@@ -46,10 +46,19 @@ class Main extends Component {
             }
         ]
     };
+
+    addNewCard = (cardInfo) => {
+
+        console.log(cardInfo);
+        this.setState(prevState => (
+            prevState.cards.push(cardInfo)
+        ));
+    }
+
     render() {
         return (
             <div className="main">
-                <AddCardForm />
+                <AddCardForm onSubmit={this.addNewCard} />
                 <CardList cards={this.state.cards} />
             </div>
         );

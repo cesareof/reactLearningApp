@@ -5,9 +5,10 @@ class AddCardForm extends Component {
     state = { username: '' };
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log('Event: Form Submit', this.state.username);
-        Axios.get(`https://api.github.com/users/${this.state.username}`);
-
+        const url = `https://api.github.com/users/${this.state.username}`
+        console.log('Event: Form Submit to: ', url);
+        Axios.get(url)
+            .then(resp => { this.props.onSubmit(resp.data) });
     };
 
     render() {
