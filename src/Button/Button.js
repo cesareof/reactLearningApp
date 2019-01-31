@@ -38,10 +38,6 @@ class App extends Component {
         return (
             <div>
                 <Button onClickFunction={this.incrementCounter} incrementValue={1} />
-                <Button onClickFunction={this.incrementCounter} incrementValue={5} />
-                <Button onClickFunction={this.incrementCounter} incrementValue={10} />
-                <Button onClickFunction={this.incrementCounter} incrementValue={100} />
-
                 <Result counter={this.state.counter} />
             </div>
         );
