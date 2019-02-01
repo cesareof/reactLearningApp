@@ -7,32 +7,36 @@ class Main extends Component {
     state = {
         cards: [
             {
-                key: 1,
+                id: 1,
                 name: "Jordan Walker",
                 avatarURL: "https://avatars3.githubusercontent.com/u/977348?v=4",
-                company: "Facebook, ReactJS"
+                company: "Facebook, ReactJS",
+                location: "Palo Atlo, California USA"
             },
             {
-                key: 2,
+                id: 2,
                 name: "Paul O'Shannessy",
                 avatarURL: "https://avatars.githubusercontent.com/u/8445?v=3",
-                company: "Facebook"
+                company: "Facebook",
+                location: "Palo Atlo, California USA"
             },
             {
-                key: 3,
+                id: 3,
                 name: "Ben Alpert",
                 avatarURL: "https://avatars.githubusercontent.com/u/6821?v=3",
-                company: "Facebook"
+                company: "Facebook",
+                location: "Palo Atlo, California USA"
             }
         ]
     };
 
     addNewCard = (cardInfo) => {
         const newCard = {
-            key: this.state.cards.reduce((prev, curr) => (prev.key > curr.key) ? prev.key : curr.key, 1) + 1,
+            id: this.state.cards.reduce((prev, curr) => (prev.id > curr.id) ? prev.id : curr.id, 1) + 1,
             name: `${cardInfo.name ? cardInfo.name : cardInfo.login}`,
             avatarURL: `${cardInfo.avatar_url} `,
-            company: `${cardInfo.company ? cardInfo.company : ' '}`
+            company: `${cardInfo.company ? cardInfo.company : ' '}`,
+            location: `${cardInfo.location ? cardInfo.location : 'Unknown'}`
         }
         if (this.state.cards.filter(card => (card.avatarURL === newCard.avatarURL)).length <= 0) {
             this.setState(prevState => (
@@ -46,9 +50,9 @@ class Main extends Component {
     }
 
     deleteCard = (deleteCard) => {
-        const keyToDelete = this.state.cards.map(card => card.key).indexOf(deleteCard.key);
-        if (keyToDelete >= 0) {
-            this.setState(prevState => prevState.cards.splice(keyToDelete, 1));
+        const idToDelete = this.state.cards.map(card => card.id).indexOf(deleteCard.id);
+        if (idToDelete >= 0) {
+            this.setState(prevState => prevState.cards.splice(idToDelete, 1));
         }
         else {
             const notFoundAlert = `Cannot find ${deleteCard ? deleteCard.name : ''} in List`;

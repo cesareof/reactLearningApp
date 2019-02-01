@@ -1,15 +1,21 @@
-import React from 'react'
+import React, { Component } from 'react'
+import RemoveCardButton from '../RemoveCardButton/RemoveCardButton.js'
 
-const Card = (props) => {
-    return (
-        <div className="cardlist">
-            <img width="75" src={props.avatarURL} alt="" />
-            <div className="card">
-                <div className="name">{props.name}</div>
-                <div className='companyName'>{props.company}</div>
-            </div>
-        </div>
-    );
+
+class Card extends Component {
+    render() {
+        return (
+            <tr>
+                <td><img width="75" src={this.props.avatarURL} alt="" /></td>
+                <td>{this.props.name}</td>
+                <td>{this.props.company}</td>
+                <td>{this.props.location}</td>
+
+                <td><RemoveCardButton onDelete={this.props.onDelete} cardToRemove={this.props} /></td>
+            </tr>
+        );
+    }
 }
+
 
 export default Card;

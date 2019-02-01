@@ -6,11 +6,16 @@ class AddCardForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const url = `https://api.github.com/users/${this.state.userName}`
+        const url = `https://api.github.com/users/${this.state.userName}`;
         Axios.get(url)
             .then(resp => {
-                this.props.onSubmit(resp.data);
-                this.setState({ userName: '' });
+                if (resp.data) {
+                    this.props.onSubmit(resp.data);
+                    this.setState({ userName: '' });
+                }
+            })
+            .catch(error => {
+                alert(error.response.status === 404 ? `${this.state.userName} Not A Valid GitHub Username` : `${error.response.statusText}`);
             });
     }
 
