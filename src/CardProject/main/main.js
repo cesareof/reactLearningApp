@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './main.css';
 import AddCardForm from '../AddCardForm/addCardForm.js'
 import CardList from '../CardList/CardList.js'
+import StyleSelector from '../StyleSelector/StyleSelector.js'
 
 class Main extends Component {
     state = {
@@ -27,7 +28,13 @@ class Main extends Component {
                 company: "Facebook",
                 location: "Palo Atlo, California USA"
             }
-        ]
+        ],
+        removeButtonOptions: {
+            bgcolor: 'red'
+        },
+        addButtonOptions: {
+            bgcolor: 'green'
+        }
     };
 
     addNewCard = (cardInfo) => {
@@ -60,11 +67,27 @@ class Main extends Component {
         }
     }
 
+    updateAddButton = (newOptions) => {
+        this.setState(prevState => prevState.addButtonOptions.bgcolor = newOptions);
+    }
+
+    updateRemoveButton = (newOptions) => {
+        this.setState(prevState => prevState.removeButtonOptions.bgcolor = newOptions);
+    }
+
     render() {
         return (
             <div className="main">
-                <AddCardForm onSubmit={this.addNewCard} />
-                <CardList cards={this.state.cards} onDelete={this.deleteCard} />
+                {console.log("State: ", this.state.removeButtonOptions)}
+                <AddCardForm onSubmit={this.addNewCard} styleOptions={this.state.addButtonOptions} />
+                <CardList cards={this.state.cards} onDelete={this.deleteCard} styleOptions={this.state.removeButtonOptions} />
+
+                <table>
+                    <tbody>
+                        <tr><td>Add Card Button: <StyleSelector options={this.state.addButtonOptions} onChangeColor={this.updateAddButton} /></td></tr>
+                        <tr><td>Remove Card Buttons: <StyleSelector options={this.state.removeButtonOptions} onChangeColor={this.updateRemoveButton} /></td></tr>
+                    </tbody>
+                </table>
             </div>
         );
     }

@@ -11,7 +11,7 @@ class Card extends Component {
                 <td>{this.props.company}</td>
                 <td>{this.props.location}</td>
 
-                <td><RemoveCardButton onDelete={this.props.onDelete} cardToRemove={this.props} /></td>
+                <td><RemoveCardButton styleOptions={this.props.styleOptions} onDelete={this.props.onDelete} cardToRemove={this.props} /></td>
             </tr>
         );
     }
